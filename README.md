@@ -28,6 +28,4 @@ Mở website, chọn **Xuất PDF**, sau đó chọn **Save as PDF** trong hộp
 Đưa tệp `index.html` lên repository và chọn nhánh chứa website làm nguồn
 GitHub Pages.
 
-Repository này đã có workflow `.github/workflows/pages.yml`. Khi được đẩy lên
-nhánh `main` và GitHub Pages dùng nguồn **GitHub Actions**, website sẽ được triển
-khai tự động.
+GitHub Pages sử dụng trực tiếp thư mục gốc của nhánh `main`.
