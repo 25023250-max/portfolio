@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Trang giới thiệu cá nhân của Phạm Hồng Hòa">
+  <title>Phạm Hồng Hòa | Trang cá nhân</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#172033",
+            violet: "#7557e8",
+            sky: "#39a8ff",
+            mist: "#f4f6ff"
+          },
+          boxShadow: {
+            soft: "0 24px 80px rgba(83, 65, 160, 0.14)"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background:
+        radial-gradient(circle at 8% 10%, rgba(117, 87, 232, .12), transparent 30%),
+        radial-gradient(circle at 92% 18%, rgba(57, 168, 255, .13), transparent 28%),
+        #fbfbff;
+    }
+    .glass {
+      background: rgba(255, 255, 255, .76);
+      border: 1px solid rgba(255, 255, 255, .85);
+      backdrop-filter: blur(18px);
+    }
+    .nav-link.active { color: #7557e8; }
+    .nav-link.active::after {
+      width: 100%;
+    }
+    .nav-link::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      margin-top: 4px;
+      background: linear-gradient(90deg, #7557e8, #39a8ff);
+      transition: width .2s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .editor-panel {
+      transform: translateX(110%);
+      transition: transform .3s ease;
+    }
+    .editor-panel.open { transform: translateX(0); }
+    .field {
+      width: 100%;
+      border: 1px solid #e3e5ef;
+      border-radius: 14px;
+      background: white;
+      padding: 11px 13px;
+      color: #172033;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field:focus {
+      border-color: #7557e8;
+      box-shadow: 0 0 0 4px rgba(117, 87, 232, .1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden font-sans text-ink antialiased">
+  <!-- Thanh điều hướng -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-40 border-b border-transparent transition">
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
+      <a href="#home" class="flex items-center gap-3 font-black">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-violet to-sky text-sm text-white shadow-lg">PH</span>
+        <span>Phạm Hồng Hòa</span>
+      </a>
+
+      <nav id="desktop-nav" class="hidden items-center gap-7 md:flex" aria-label="Điều hướng chính">
+        <a class="nav-link text-sm font-bold text-slate-500" href="#home">Trang chủ</a>
+        <a class="nav-link text-sm font-bold text-slate-500" href="#about">Giới thiệu</a>
+        <a class="nav-link text-sm font-bold text-slate-500" href="#projects">Dự án</a>
+        <a class="nav-link text-sm font-bold text-slate-500" href="#contact">Liên hệ</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button data-open-editor class="hidden rounded-full bg-ink px-4 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-violet sm:block">
+          Chỉnh sửa
+        </button>
+        <button id="menu-button" class="grid h-11 w-11 place-items-center rounded-full bg-ink text-white shadow-lg md:hidden" aria-expanded="false" aria-controls="mobile-nav">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="sr-only">Mở menu</span>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-nav" class="mx-4 hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-soft md:hidden">
+      <a class="block rounded-xl px-3 py-2 font-bold" href="#home">Trang chủ</a>
+      <a class="block rounded-xl px-3 py-2 font-bold" href="#about">Giới thiệu</a>
+      <a class="block rounded-xl px-3 py-2 font-bold" href="#projects">Dự án</a>
+      <a class="block rounded-xl px-3 py-2 font-bold" href="#contact">Liên hệ</a>
+      <button data-open-editor class="mt-2 w-full rounded-xl bg-ink px-3 py-3 text-left font-bold text-white">Chỉnh sửa thông tin</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="relative flex min-h-screen items-center overflow-hidden px-5 pb-20 pt-32 lg:px-8">
+      <div class="absolute left-[12%] top-32 h-64 w-64 rounded-full bg-violet/10 blur-3xl"></div>
+      <div class="absolute bottom-20 right-[8%] h-72 w-72 rounded-full bg-sky/10 blur-3xl"></div>
+      <div class="mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.1fr_.9fr]">
+        <div class="reveal visible relative z-10">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-violet/20 bg-white/70 px-4 py-2 text-sm font-bold text-violet">
+            <span class="h-2 w-2 rounded-full bg-violet"></span>
+            Portfolio cá nhân
+          </div>
+          <p class="mb-3 text-sm font-black uppercase tracking-[.24em] text-slate-400">Xin chào, tôi là</p>
+          <h1 id="hero-name" class="max-w-4xl break-words text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-8xl">Phạm Hồng Hòa</h1>
+          <p id="hero-intro" class="mt-7 max-w-2xl text-lg leading-8 text-slate-600">
+            Sinh viên năm nhất Trường Đại học Công nghệ, Đại học Quốc gia Hà Nội. Tôi yêu thích thể thao, đặc biệt là bi-a; hòa đồng, vui vẻ và ham học hỏi.
+          </p>
+          <div class="mt-9 flex flex-wrap gap-3">
+            <button data-scroll-projects class="rounded-full bg-gradient-to-r from-violet to-sky px-6 py-3.5 font-bold text-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl">
+              Xem dự án
+            </button>
+            <button data-scroll-contact class="rounded-full border border-slate-300 bg-white px-6 py-3.5 font-bold transition hover:-translate-y-1 hover:border-violet hover:text-violet">
+              Liên hệ với tôi
+            </button>
+          </div>
+        </div>
+
+        <div class="reveal visible relative mx-auto w-full max-w-lg">
+          <div class="absolute -inset-8 rotate-6 rounded-[3rem] bg-gradient-to-br from-violet/20 to-sky/20 blur-sm"></div>
+          <div class="glass relative rounded-[2.5rem] p-5 shadow-soft">
+            <div class="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-gradient-to-br from-violet/15 via-white to-sky/20">
+              <img id="hero-avatar" class="hidden h-full w-full object-cover" alt="Ảnh đại diện Phạm Hồng Hòa">
+              <div id="avatar-placeholder" class="grid h-full place-items-center">
+                <div class="text-center">
+                  <span class="mx-auto grid h-32 w-32 place-items-center rounded-full bg-gradient-to-br from-violet to-sky text-4xl font-black text-white shadow-xl">PH</span>
+                  <p class="mt-5 font-bold text-slate-500">Thêm ảnh đại diện của bạn</p>
+                </div>
+              </div>
+            </div>
+            <button data-open-editor class="absolute bottom-9 right-9 rounded-full bg-white px-4 py-2 text-sm font-black text-violet shadow-lg transition hover:-translate-y-1">
+              + Thêm ảnh
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Giới thiệu -->
+    <section id="about" class="px-5 py-24 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal mb-12 max-w-3xl">
+          <p class="mb-3 text-sm font-black uppercase tracking-[.22em] text-violet">Giới thiệu</p>
+          <h2 class="text-4xl font-black tracking-tight sm:text-5xl">Một chút về tôi</h2>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
+          <article class="reveal rounded-[2rem] bg-gradient-to-br from-violet to-indigo-500 p-8 text-white shadow-soft sm:p-12">
+            <p id="about-intro" class="text-2xl font-semibold leading-relaxed sm:text-3xl">
+              Sinh viên năm nhất Trường Đại học Công nghệ, Đại học Quốc gia Hà Nội. Tôi yêu thích thể thao, đặc biệt là bi-a; hòa đồng, vui vẻ và ham học hỏi.
+            </p>
+          </article>
+          <div class="grid gap-6">
+            <article class="reveal glass rounded-[2rem] p-8 shadow-soft">
+              <span class="text-xs font-black uppercase tracking-[.18em] text-slate-400">Họ và tên</span>
+              <p id="about-name" class="mt-3 text-2xl font-black">Phạm Hồng Hòa</p>
+            </article>
+            <article class="reveal glass rounded-[2rem] p-8 shadow-soft">
+              <span class="text-xs font-black uppercase tracking-[.18em] text-slate-400">Địa điểm</span>
+              <p id="about-location" class="mt-3 text-xl font-bold">41/99 Định Công, Hoàng Mai, Hà Nội</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dự án -->
+    <section id="projects" class="bg-mist px-5 py-24 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <div class="max-w-3xl">
+            <p class="mb-3 text-sm font-black uppercase tracking-[.22em] text-violet">Dự án</p>
+            <h2 class="text-4xl font-black tracking-tight sm:text-5xl">Sản phẩm tôi đã thực hiện</h2>
+          </div>
+          <button data-open-editor class="w-fit rounded-full border border-violet px-5 py-3 text-sm font-black text-violet transition hover:bg-violet hover:text-white">
+            Cập nhật dự án
+          </button>
+        </div>
+        <div id="project-list" class="grid gap-7 md:grid-cols-2"></div>
+      </div>
+    </section>
+
+    <!-- Liên hệ -->
+    <section id="contact" class="px-5 py-24 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.8fr_1.2fr]">
+        <div class="reveal">
+          <p class="mb-3 text-sm font-black uppercase tracking-[.22em] text-violet">Liên hệ</p>
+          <h2 class="text-4xl font-black tracking-tight sm:text-5xl">Cùng bắt đầu một cuộc trò chuyện</h2>
+          <p id="contact-message" class="mt-5 text-lg leading-8 text-slate-600">Hãy liên hệ với tôi qua email, điện thoại hoặc Facebook.</p>
+          <div class="mt-8 grid gap-3">
+            <a id="contact-email" class="glass rounded-2xl p-5 font-bold shadow-soft transition hover:-translate-y-1 hover:text-violet" href="mailto:25023250@vnu.edu.vn">25023250@vnu.edu.vn</a>
+            <a id="contact-phone" class="glass rounded-2xl p-5 font-bold shadow-soft transition hover:-translate-y-1 hover:text-violet" href="tel:0923967851">0923967851</a>
+            <a id="contact-facebook" class="glass rounded-2xl p-5 font-bold shadow-soft transition hover:-translate-y-1 hover:text-violet" href="#" target="_blank" rel="noreferrer">Facebook: Phạm Hòa</a>
+          </div>
+        </div>
+
+        <form id="contact-form" class="reveal glass rounded-[2rem] p-7 shadow-soft sm:p-10">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label class="font-bold">Tên của bạn
+              <input class="field mt-2" name="name" placeholder="..." required>
+            </label>
+            <label class="font-bold">Email
+              <input class="field mt-2" name="email" type="email" placeholder="..." required>
+            </label>
+          </div>
+          <label class="mt-5 block font-bold">Lời nhắn
+            <textarea class="field mt-2 min-h-36 resize-y" name="message" placeholder="..." required></textarea>
+          </label>
+          <button class="mt-6 rounded-full bg-ink px-6 py-3.5 font-black text-white transition hover:-translate-y-1 hover:bg-violet" type="submit">Gửi lời nhắn</button>
+          <p id="form-status" class="mt-4 hidden text-sm font-bold text-violet"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 px-5 py-9 lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-3 text-sm text-slate-500 sm:flex-row">
+      <p>© <span id="year"></span> Phạm Hồng Hòa Portfolio. All rights reserved.</p>
+      <a class="font-bold hover:text-violet" href="index.html">Quay lại Portfolio học tập</a>
+    </div>
+  </footer>
+
+  <!-- Lớp nền và bảng chỉnh sửa -->
+  <div id="editor-backdrop" class="fixed inset-0 z-50 hidden bg-ink/35 backdrop-blur-sm"></div>
+  <aside id="editor-panel" class="editor-panel fixed inset-y-0 right-0 z-[60] w-full max-w-xl overflow-y-auto bg-slate-50 p-6 shadow-2xl sm:p-8" aria-label="Chỉnh sửa thông tin">
+    <div class="mb-8 flex items-start justify-between gap-4">
+      <div>
+        <p class="text-sm font-black uppercase tracking-[.18em] text-violet">Thông tin Portfolio</p>
+        <h2 class="mt-2 text-3xl font-black">Chỉnh sửa nội dung</h2>
+      </div>
+      <button id="close-editor" class="grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white text-xl" aria-label="Đóng">×</button>
+    </div>
+
+    <form id="editor-form" class="space-y-8">
+      <fieldset class="space-y-4">
+        <legend class="mb-4 text-lg font-black">Giới thiệu</legend>
+        <label class="block text-sm font-bold">Họ và tên
+          <input id="input-name" class="field mt-2" placeholder="...">
+        </label>
+        <label class="block text-sm font-bold">Giới thiệu
+          <textarea id="input-intro" class="field mt-2 min-h-28" placeholder="..."></textarea>
+        </label>
+        <label class="block text-sm font-bold">Địa điểm
+          <input id="input-location" class="field mt-2" placeholder="...">
+        </label>
+        <label class="block text-sm font-bold">Ảnh đại diện
+          <input id="input-avatar" class="mt-2 block w-full rounded-xl border border-slate-200 bg-white p-3 text-sm" type="file" accept="image/*">
+          <span class="mt-2 block text-xs font-normal text-slate-500">Ảnh được lưu trong trình duyệt trên thiết bị này.</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="space-y-4 border-t border-slate-200 pt-7">
+        <div class="flex items-center justify-between">
+          <legend class="text-lg font-black">Dự án</legend>
+          <button id="add-project" type="button" class="rounded-full bg-violet/10 px-4 py-2 text-sm font-black text-violet">+ Thêm dự án</button>
+        </div>
+        <div id="project-editors" class="space-y-5"></div>
+      </fieldset>
+
+      <fieldset class="space-y-4 border-t border-slate-200 pt-7">
+        <legend class="mb-4 text-lg font-black">Liên hệ</legend>
+        <label class="block text-sm font-bold">Email
+          <input id="input-email" class="field mt-2" type="email" placeholder="...">
+        </label>
+        <label class="block text-sm font-bold">Số điện thoại
+          <input id="input-phone" class="field mt-2" placeholder="...">
+        </label>
+        <label class="block text-sm font-bold">Tên Facebook
+          <input id="input-facebook-name" class="field mt-2" placeholder="...">
+        </label>
+        <label class="block text-sm font-bold">Link Facebook
+          <input id="input-facebook-url" class="field mt-2" type="url" placeholder="...">
+        </label>
+        <label class="block text-sm font-bold">Lời nhắn liên hệ
+          <textarea id="input-contact-message" class="field mt-2 min-h-24" placeholder="..."></textarea>
+        </label>
+      </fieldset>
+
+      <div class="sticky bottom-0 flex flex-wrap gap-3 border-t border-slate-200 bg-slate-50 py-5">
+        <button class="rounded-full bg-gradient-to-r from-violet to-sky px-6 py-3 font-black text-white shadow-lg" type="submit">Lưu thông tin</button>
+        <button id="reset-info" class="rounded-full border border-red-200 bg-white px-6 py-3 font-black text-red-500" type="button">Đặt lại</button>
+        <span id="save-status" class="self-center text-sm font-bold text-violet"></span>
+      </div>
+    </form>
+  </aside>
+
+  <script>
+    // Dữ liệu mặc định
+    const STORAGE_KEY = "pham-hong-hoa-personal-portfolio";
+    const defaultData = {
+      name: "Phạm Hồng Hòa",
+      intro: "Sinh viên năm nhất Trường Đại học Công nghệ, Đại học Quốc gia Hà Nội. Tôi yêu thích thể thao, đặc biệt là bi-a; hòa đồng, vui vẻ và ham học hỏi.",
+      location: "41/99 Định Công, Hoàng Mai, Hà Nội",
+      avatar: "",
+      email: "25023250@vnu.edu.vn",
+      phone: "0923967851",
+      facebookName: "Phạm Hòa",
+      facebookUrl: "",
+      contactMessage: "Hãy liên hệ với tôi qua email, điện thoại hoặc Facebook.",
+      projects: [{
+        name: "Hệ thống đấu giá trực tuyến",
+        description: "Hệ thống xây dựng môi trường đấu giá online với các chức năng đầy đủ.",
+        tools: "JavaFX, XAMPP, MySQL, Maven",
+        link: "https://github.com/25023250-max/java-project-group9",
+        image: ""
+      }]
+    };
+
+    let data = loadData();
+
+    function loadData() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return saved ? { ...defaultData, ...saved } : structuredClone(defaultData);
+      } catch {
+        return structuredClone(defaultData);
+      }
+    }
+
+    function safeText(value) {
+      return value && value.trim() ? value.trim() : "...";
+    }
+
+    function escapeHtml(value = "") {
+      return value.replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      })[char]);
+    }
+
+    // Hiển thị dữ liệu lên Portfolio
+    function renderPortfolio() {
+      const name = safeText(data.name);
+      const intro = safeText(data.intro);
+      const location = safeText(data.location);
+
+      document.querySelector("#hero-name").textContent = name;
+      document.querySelector("#hero-intro").textContent = intro;
+      document.querySelector("#about-name").textContent = name;
+      document.querySelector("#about-intro").textContent = intro;
+      document.querySelector("#about-location").textContent = location;
+      document.querySelector("#contact-message").textContent = safeText(data.contactMessage);
+
+      const avatar = document.querySelector("#hero-avatar");
+      const placeholder = document.querySelector("#avatar-placeholder");
+      if (data.avatar) {
+        avatar.src = data.avatar;
+        avatar.classList.remove("hidden");
+        placeholder.classList.add("hidden");
+      } else {
+        avatar.removeAttribute("src");
+        avatar.classList.add("hidden");
+        placeholder.classList.remove("hidden");
+      }
+
+      const email = safeText(data.email);
+      const phone = safeText(data.phone);
+      const facebookName = safeText(data.facebookName);
+      const facebookUrl = data.facebookUrl && data.facebookUrl.trim() ? data.facebookUrl.trim() : "#";
+
+      const emailLink = document.querySelector("#contact-email");
+      emailLink.textContent = email;
+      emailLink.href = email === "..." ? "#" : `mailto:${email}`;
+
+      const phoneLink = document.querySelector("#contact-phone");
+      phoneLink.textContent = phone;
+      phoneLink.href = phone === "..." ? "#" : `tel:${phone.replace(/\s/g, "")}`;
+
+      const facebookLink = document.querySelector("#contact-facebook");
+      facebookLink.textContent = `Facebook: ${facebookName}`;
+      facebookLink.href = facebookUrl;
+
+      renderProjects();
+      fillEditor();
+    }
+
+    function renderProjects() {
+      const list = document.querySelector("#project-list");
+      if (!data.projects.length) {
+        list.innerHTML = '<div class="rounded-[2rem] border border-dashed border-slate-300 p-10 text-center text-slate-500">...</div>';
+        return;
+      }
+
+      list.innerHTML = data.projects.map((project, index) => {
+        const image = project.image && project.image.trim()
+          ? `<img class="h-full w-full object-cover transition duration-500 group-hover:scale-105" src="${escapeHtml(project.image)}" alt="${escapeHtml(safeText(project.name))}">`
+          : `<div class="grid h-full place-items-center bg-gradient-to-br from-violet/20 to-sky/20">
+               <span class="text-6xl font-black text-violet/35">0${index + 1}</span>
+             </div>`;
+        const link = project.link && project.link.trim()
+          ? `<a class="inline-flex items-center gap-2 font-black text-violet hover:gap-3" href="${escapeHtml(project.link)}" target="_blank" rel="noreferrer">Xem dự án <span>↗</span></a>`
+          : `<span class="font-black text-slate-400">Link dự án: ...</span>`;
+
+        return `
+          <article class="group reveal visible overflow-hidden rounded-[2rem] bg-white shadow-soft transition duration-300 hover:-translate-y-2">
+            <div class="aspect-[16/10] overflow-hidden">${image}</div>
+            <div class="p-7">
+              <p class="text-xs font-black uppercase tracking-[.18em] text-sky">Dự án ${String(index + 1).padStart(2, "0")}</p>
+              <h3 class="mt-3 text-2xl font-black">${escapeHtml(safeText(project.name))}</h3>
+              <p class="mt-4 leading-7 text-slate-600">${escapeHtml(safeText(project.description))}</p>
+              <div class="my-5 flex flex-wrap gap-2">
+                ${safeText(project.tools).split(",").map(tool => `<span class="rounded-full bg-mist px-3 py-1.5 text-xs font-black text-violet">${escapeHtml(tool.trim())}</span>`).join("")}
+              </div>
+              ${link}
+            </div>
+          </article>`;
+      }).join("");
+    }
+
+    // Form chỉnh sửa dự án
+    function renderProjectEditors() {
+      const container = document.querySelector("#project-editors");
+      container.innerHTML = data.projects.map((project, index) => `
+        <div class="rounded-2xl border border-slate-200 bg-white p-5" data-project-editor="${index}">
+          <div class="mb-4 flex items-center justify-between">
+            <strong>Dự án ${index + 1}</strong>
+            <button class="text-sm font-black text-red-500" type="button" data-remove-project="${index}">Xóa</button>
+          </div>
+          <div class="space-y-3">
+            <input class="field" data-project-field="name" value="${escapeHtml(project.name)}" placeholder="Tên dự án: ...">
+            <textarea class="field min-h-24" data-project-field="description" placeholder="Mô tả dự án: ...">${escapeHtml(project.description)}</textarea>
+            <input class="field" data-project-field="tools" value="${escapeHtml(project.tools)}" placeholder="Công cụ sử dụng: ...">
+            <input class="field" data-project-field="link" value="${escapeHtml(project.link)}" placeholder="Link dự án: ...">
+            <input class="field" data-project-field="image" value="${escapeHtml(project.image)}" placeholder="Ảnh dự án dạng URL: ...">
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function fillEditor() {
+      document.querySelector("#input-name").value = data.name;
+      document.querySelector("#input-intro").value = data.intro;
+      document.querySelector("#input-location").value = data.location;
+      document.querySelector("#input-email").value = data.email;
+      document.querySelector("#input-phone").value = data.phone;
+      document.querySelector("#input-facebook-name").value = data.facebookName;
+      document.querySelector("#input-facebook-url").value = data.facebookUrl;
+      document.querySelector("#input-contact-message").value = data.contactMessage;
+      renderProjectEditors();
+    }
+
+    // Mở và đóng bảng chỉnh sửa
+    const editorPanel = document.querySelector("#editor-panel");
+    const editorBackdrop = document.querySelector("#editor-backdrop");
+
+    function setEditor(open) {
+      editorPanel.classList.toggle("open", open);
+      editorBackdrop.classList.toggle("hidden", !open);
+      document.body.classList.toggle("overflow-hidden", open);
+    }
+
+    document.querySelectorAll("[data-open-editor]").forEach(button => {
+      button.addEventListener("click", () => setEditor(true));
+    });
+    document.querySelector("#close-editor").addEventListener("click", () => setEditor(false));
+    editorBackdrop.addEventListener("click", () => setEditor(false));
+
+    // Thêm, xóa và lưu dự án
+    document.querySelector("#add-project").addEventListener("click", () => {
+      collectProjectEditors();
+      data.projects.push({ name: "", description: "", tools: "", link: "", image: "" });
+      renderProjectEditors();
+    });
+
+    document.querySelector("#project-editors").addEventListener("click", event => {
+      const button = event.target.closest("[data-remove-project]");
+      if (!button) return;
+      collectProjectEditors();
+      data.projects.splice(Number(button.dataset.removeProject), 1);
+      renderProjectEditors();
+    });
+
+    function collectProjectEditors() {
+      data.projects = [...document.querySelectorAll("[data-project-editor]")].map(editor => ({
+        name: editor.querySelector('[data-project-field="name"]').value,
+        description: editor.querySelector('[data-project-field="description"]').value,
+        tools: editor.querySelector('[data-project-field="tools"]').value,
+        link: editor.querySelector('[data-project-field="link"]').value,
+        image: editor.querySelector('[data-project-field="image"]').value
+      }));
+    }
+
+    document.querySelector("#editor-form").addEventListener("submit", event => {
+      event.preventDefault();
+      collectProjectEditors();
+      data.name = document.querySelector("#input-name").value;
+      data.intro = document.querySelector("#input-intro").value;
+      data.location = document.querySelector("#input-location").value;
+      data.email = document.querySelector("#input-email").value;
+      data.phone = document.querySelector("#input-phone").value;
+      data.facebookName = document.querySelector("#input-facebook-name").value;
+      data.facebookUrl = document.querySelector("#input-facebook-url").value;
+      data.contactMessage = document.querySelector("#input-contact-message").value;
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      renderPortfolio();
+      const status = document.querySelector("#save-status");
+      status.textContent = "Đã lưu thành công.";
+      window.setTimeout(() => status.textContent = "", 2200);
+    });
+
+    // Chọn ảnh, thu nhỏ và lưu dưới dạng Data URL
+    document.querySelector("#input-avatar").addEventListener("change", event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = loadEvent => {
+        const image = new Image();
+        image.onload = () => {
+          const maxSize = 900;
+          const scale = Math.min(1, maxSize / Math.max(image.width, image.height));
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(image.width * scale);
+          canvas.height = Math.round(image.height * scale);
+          canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+          data.avatar = canvas.toDataURL("image/jpeg", .84);
+          renderPortfolio();
+          document.querySelector("#save-status").textContent = "Ảnh đã chọn. Hãy bấm Lưu thông tin.";
+        };
+        image.src = loadEvent.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.querySelector("#reset-info").addEventListener("click", () => {
+      if (!confirm("Bạn có muốn xóa dữ liệu đã lưu và trở về nội dung mặc định?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      data = structuredClone(defaultData);
+      renderPortfolio();
+      document.querySelector("#save-status").textContent = "Đã đặt lại thông tin.";
+    });
+
+    // Điều hướng và hiệu ứng cuộn
+    document.querySelectorAll("[data-scroll-projects]").forEach(button => {
+      button.addEventListener("click", () => document.querySelector("#projects").scrollIntoView({ behavior: "smooth" }));
+    });
+    document.querySelectorAll("[data-scroll-contact]").forEach(button => {
+      button.addEventListener("click", () => document.querySelector("#contact").scrollIntoView({ behavior: "smooth" }));
+    });
+
+    const menuButton = document.querySelector("#menu-button");
+    const mobileNav = document.querySelector("#mobile-nav");
+    menuButton.addEventListener("click", () => {
+      const open = menuButton.getAttribute("aria-expanded") !== "true";
+      menuButton.setAttribute("aria-expanded", String(open));
+      mobileNav.classList.toggle("hidden", !open);
+    });
+    mobileNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.add("hidden");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const header = document.querySelector("#site-header");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("glass", window.scrollY > 20);
+      header.classList.toggle("shadow-sm", window.scrollY > 20);
+    }, { passive: true });
+
+    const sections = document.querySelectorAll("main section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => link.classList.toggle("active", link.hash === `#${entry.target.id}`));
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    sections.forEach(section => sectionObserver.observe(section));
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
+
+    // Form liên hệ minh họa, không gửi dữ liệu ra máy chủ
+    document.querySelector("#contact-form").addEventListener("submit", event => {
+      event.preventDefault();
+      const status = document.querySelector("#form-status");
+      status.textContent = "Cảm ơn bạn! Form đang ở chế độ minh họa và chưa kết nối máy chủ gửi thư.";
+      status.classList.remove("hidden");
+      event.target.reset();
+    });
+
+    document.querySelector("#year").textContent = new Date().getFullYear();
+    renderPortfolio();
+  </script>
+</body>
+</html>
